@@ -159,23 +159,24 @@ public class AsymptoticBehavior {
  *     t2 random = 53.0ms
  *     t2 pre-sorted = 10.0ms
  *     v.
- *     t2 / t1 random =
- *     t2 / t1 pre-sorted =
+ *     t2 / t1 random = 3.78571ms
+ *     t2 / t1 pre-sorted = 2.5ms
  *     How does this relate to O(n) for random
- *
+ *     Since O(n) = n (linear), the T(n) is extremely small.
  *     How does this relate to O(n) for pre-sorted
+ *     Since O(n) = n (linear), the T(n) is extremely small.
  *
  * 2.
  *     i.
  *     t1 = 1172504.0ms
  *     t2 = 3.0107E7ms
- *     t2 / t1 =
+ *     t2 / t1 = 25.677524ms
  *     
  * 3.
  *     n is the same as the array being searched (100000)
  *     t1 = 10.0ms
  *     t2 = 43.0ms
- *     t2 / t1 =
+ *     t2 / t1 = 4.3ms
  * 4.
  *     Main Method:
  *     Generate Random Array:
