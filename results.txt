@@ -1,0 +1,9 @@
+Generating random array: 14.0
+Generating sorted array: 4.0
+Sorting random array: 1172504.0
+Searching for target: 10.0
+
+Generating random array: 53.0
+Generating sorted array: 10.0
+Sorting random array: 3.0106958E7
+Searching for target: 43.0
