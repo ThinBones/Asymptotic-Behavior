@@ -20,30 +20,30 @@ public class AsymptoticBehavior {
 
 
     public static void main(String[] a) throws FileNotFoundException {
-        double timeMillis1 = System.currentTimeMillis();
-        int[] randArr   = generateRandomArray();
-        double timeMillis2 = System.currentTimeMillis();
-        double timeRunning = timeMillis2 - timeMillis1;
-        System.out.println("Generating random array: " + timeRunning);
+        long   startTime  = System.nanoTime();
+        int[]  randArr    = generateRandomArray();
+        long   endTime    = System.nanoTime();
+        long   totalTime  = endTime - startTime;
+        System.out.println("Generating random array: " + totalTime);
 
-        timeMillis1 = System.currentTimeMillis();
-        int[] sortedArr = generateSortedArray();
-        timeMillis2 = System.currentTimeMillis();
-        timeRunning = timeMillis2 - timeMillis1;
-        System.out.println("Generating sorted array: " +  timeRunning);
+        startTime        = System.nanoTime();
+        int[]  sortedArr = generateSortedArray();
+        endTime          = System.nanoTime();
+        totalTime        = endTime - startTime;
+        System.out.println("Generating sorted array: " +  totalTime);
 
-        timeMillis1 = System.currentTimeMillis();
+        startTime = System.nanoTime();
         sortArray(randArr);
-        timeMillis2 = System.currentTimeMillis();
-        timeRunning = timeMillis2 - timeMillis1;
-        System.out.println("Sorting random array: " + timeRunning);
+        endTime   = System.nanoTime();
+        totalTime = endTime - startTime;
+        System.out.println("Sorting random array: " + totalTime);
 
         getTarget();
-        timeMillis1 = System.currentTimeMillis();
+        startTime       = System.nanoTime();
         boolean inArray = binarySearch(randArr, target);
-        timeMillis2 = System.currentTimeMillis();
-        timeRunning = timeMillis2 - timeMillis1;
-        System.out.println("Searching for target: " + timeRunning);
+        endTime         = System.nanoTime();
+        totalTime       = endTime - startTime;
+        System.out.println("Searching for target: " + totalTime);
         System.out.println("Target in array is " + inArray);
     }
 
@@ -54,10 +54,10 @@ public class AsymptoticBehavior {
      */
     public static int[] generateRandomArray() {
         Random random = new Random();
-        int[]  intArr = new int[500000];
+        int[]  intArr = new int[100000];
 
-        for(int i = 0; i < 500000; i++) {
-            int randInt = random.nextInt(500000);
+        for(int i = 0; i < 100000; i++) {
+            int randInt = random.nextInt(100000);
             intArr[i] = randInt;
         }
         return intArr;
@@ -69,9 +69,9 @@ public class AsymptoticBehavior {
      * @return
      */
     public static int[] generateSortedArray() {
-        int[] intArr = new int[500000];
+        int[] intArr = new int[100000];
 
-        for(int i = 0; i < 500000; i++) {
+        for(int i = 0; i < 100000; i++) {
             intArr[i] = i;
         }
 
@@ -139,41 +139,69 @@ public class AsymptoticBehavior {
 
 /**
  * 1.
- *     i.
- *     O(n) for random: O(n) = n
- *     O(n) for pre-sorted: O(n) = n
- *     ii.
- *     t1 random =
- *     t1 pre-sorted =
- *     iv.
- *     t2 random =
- *     t2 pre-sorted =
- *     v.
- *     t2 / t1 random =
- *     t2 / t1 pre-sorted =
- *     How does this relate to O(n) for random
  *
- *     How does this relate to O(n) for pre-sorted
+ * i. What "n" did you choose for the problem and what is O(n)? 
+ *    n = 10000 
+ *    O(n) for random: O(n) = n
+ *    O(n) for pre-sorted: O(n) = n
+ *
+ * ii. What was the time the generateArray() method took to run? 
+ *    t1 = 779600 for random
+ *    t1 = 98200 for pre-sorted
+ *
+ * iv. What was the time the constructor took to run? 
+ *    t2 = 3295000 for random
+ *    t2 = 820600 for pre-sorted
+ *
+ * v. What is t2 / t1 and how does it relate to O(n)? 
+ *    t2 / t1 = 4.22 for random 
+ *    t2 / t1 = 8.35 for pre-sorted
+ *    This fits with O(n) as O(n) is linear
+ *    which is same as the increase between t2 and t1
+ *
  *
  * 2.
- *     i.
- *     t1 =
- *     t2 =
- *     t2 / t1 =
- *     
+ *
+ * i. What "n" did you choose for the problem and what is O(n)? 
+ *    n = 10000
+ *    O(n) = O(n^2)
+ *
+ * ii. What was the time the sort took to run? 
+ *    t1 = 99209800
+ *
+ * iv. What was the time the sort took to run? 
+ *    t2 = 11728709200
+ *
+ * v. What is t2 / t1 and how does it relate to O(n)? 
+ *    t2 / t1 = 118.23 
+ *    The near 100 quotient between t2 and t1
+ *    demonstrates a quadratic increase (since 10^2
+ *    is 100) which correlates to O(n) = n^2.
+ *
  * 3.
- *     n is the same as the array being searched (100000)
- *     t1 = 10.0ms
- *     t2 = 43.0ms
- *     t2 / t1 =
- * 4.
- *     Main Method:
- *     Generate Random Array:
- *     Generate Sorted Array:
- *     Sort Random Array:
- *     Search Array:
- * 5.
- *     We found that often in practice the time it
- *     takes does not line up exactly with Big-Oh
- *     since we are finding T(n) instead of O(n).
+ *
+ * i. What "n" did you choose for the problem and what is O(n)? 
+ *    n = 10000
+ *    O(n) = O(log n)
+ *
+ * ii. What was the time the search took to run? 
+ *    t1 = 2600
+ *
+ * iv. What was the time the search took to run? 
+ *    t2 = 2400
+ *
+ * v. What is t2 / t1 and how does it relate to O(n)? 
+ *    t2 / t1 = 0.92, which is consistent with O(log n)
+ *    since O(log n) is faster than linear, which is 
+ *    why the quotient is less than 1.
+ *
+ * Did the time correspond with Big-O calculations? 
+ * Constructor? Yes 
+ * Sorting? Yes 
+ * Searching? Yes
+ *
+ * Clarify discrepancies:
+ * Sorting was slower than expected due to the fact that
+ * bubble sort is O(n^2) which is a slower process and
+ * is more likely to take longer.
  */
