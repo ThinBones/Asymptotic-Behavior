@@ -20,63 +20,61 @@ public class AsymptoticBehavior {
 
 
     public static void main(String[] a) throws FileNotFoundException {
-        double currentTimeMillis = System.currentTimeMillis();
-        localTimeMillis = System.currentTimeMillis();
-
+        double timeMillis1 = System.currentTimeMillis();
         int[] randArr   = generateRandomArray();
-        System.out.println("Generating random array: " + localTimeMillis);
+        double timeMillis2 = System.currentTimeMillis();
+        double timeRunning = timeMillis2 - timeMillis1;
+        System.out.println("Generating random array: " + timeRunning);
 
+        timeMillis1 = System.currentTimeMillis();
         int[] sortedArr = generateSortedArray();
-        System.out.println("Generating sorted array: " + localTimeMillis);
+        timeMillis2 = System.currentTimeMillis();
+        timeRunning = timeMillis2 - timeMillis1;
+        System.out.println("Generating sorted array: " +  timeRunning);
 
+        timeMillis1 = System.currentTimeMillis();
         sortArray(randArr);
-        System.out.println("Sorting random array: " + localTimeMillis);
+        timeMillis2 = System.currentTimeMillis();
+        timeRunning = timeMillis2 - timeMillis1;
+        System.out.println("Sorting random array: " + timeRunning);
 
         getTarget();
-        binarySearch(randArr, target);
-        System.out.println("Searching for target: " + localTimeMillis);
-
-        double newTimeMillis = System.currentTimeMillis();
-        localTimeMillis = newTimeMillis - currentTimeMillis;
-
-        System.out.println("Main method: " + localTimeMillis);
+        timeMillis1 = System.currentTimeMillis();
+        boolean inArray = binarySearch(randArr, target);
+        timeMillis2 = System.currentTimeMillis();
+        timeRunning = timeMillis2 - timeMillis1;
+        System.out.println("Searching for target: " + timeRunning);
+        System.out.println("Target in array is " + inArray);
     }
 
     /**
-     * Generates an array with 100000 indexes with random integers in
+     * Generates an array with 500000 indexes with random integers in
      * each index
      * @return
      */
     public static int[] generateRandomArray() {
-        double currentTimeMillis = System.currentTimeMillis();
         Random random = new Random();
-        int[]  intArr = new int[5000000];
+        int[]  intArr = new int[500000];
 
-        for(int i = 0; i < 5000000; i++) {
-            int randInt = random.nextInt(10000);
+        for(int i = 0; i < 500000; i++) {
+            int randInt = random.nextInt(500000);
             intArr[i] = randInt;
         }
-
-        double newTimeMillis = System.currentTimeMillis();
-        localTimeMillis = newTimeMillis - currentTimeMillis;
         return intArr;
     }
 
     /**
-     * Generates an array with 1000000 indexes with increasing integers
+     * Generates an array with 500000 indexes with increasing integers
      * in each index
      * @return
      */
     public static int[] generateSortedArray() {
-        double currentTimeMillis = System.currentTimeMillis();
-        int[] intArr = new int[5000000];
+        int[] intArr = new int[500000];
 
-        for(int i = 0; i < 5000000; i++) {
+        for(int i = 0; i < 500000; i++) {
             intArr[i] = i;
         }
 
-        double newTimeMillis = System.currentTimeMillis();
-        localTimeMillis = newTimeMillis - currentTimeMillis;
         return intArr;
     }
 
@@ -85,7 +83,6 @@ public class AsymptoticBehavior {
      * @param arr
      */
     public static void sortArray(int[] arr) {
-        double currentTimeMillis = System.currentTimeMillis();
         int n = arr.length;
         int temp = 0;
         for(int i = 0; i < n; i++){
@@ -97,8 +94,6 @@ public class AsymptoticBehavior {
                 }
             }
         }
-        double newTimeMillis = System.currentTimeMillis();
-        localTimeMillis = newTimeMillis - currentTimeMillis;
     }
 
     /**
@@ -106,7 +101,6 @@ public class AsymptoticBehavior {
      * @throws FileNotFoundException
      */
     public static void getTarget() throws FileNotFoundException {
-        double currentTimeMillis = System.currentTimeMillis();
         FileReader reader;
         String fileInputName = "data.txt";
         Scanner scan = null;
@@ -114,8 +108,6 @@ public class AsymptoticBehavior {
         scan = new Scanner(new BufferedReader(new FileReader(fileInputName)));
         int int1 = scan.nextInt();
 
-        double newTimeMillis = System.currentTimeMillis();
-        localTimeMillis = newTimeMillis - currentTimeMillis;
         target = int1;
     }
 
@@ -141,8 +133,6 @@ public class AsymptoticBehavior {
                 high = mid - 1;
         }
 
-        double newTimeMillis = System.currentTimeMillis();
-        localTimeMillis -= newTimeMillis;
         return false;
     }
 }
@@ -153,30 +143,29 @@ public class AsymptoticBehavior {
  *     O(n) for random: O(n) = n
  *     O(n) for pre-sorted: O(n) = n
  *     ii.
- *     t1 random = 14.0ms
- *     t1 pre-sorted = 4.0ms
+ *     t1 random =
+ *     t1 pre-sorted =
  *     iv.
- *     t2 random = 53.0ms
- *     t2 pre-sorted = 10.0ms
+ *     t2 random =
+ *     t2 pre-sorted =
  *     v.
- *     t2 / t1 random = 3.78571ms
- *     t2 / t1 pre-sorted = 2.5ms
+ *     t2 / t1 random =
+ *     t2 / t1 pre-sorted =
  *     How does this relate to O(n) for random
- *     Since O(n) = n (linear), the T(n) is extremely small.
+ *
  *     How does this relate to O(n) for pre-sorted
- *     Since O(n) = n (linear), the T(n) is extremely small.
  *
  * 2.
  *     i.
- *     t1 = 1172504.0ms
- *     t2 = 3.0107E7ms
- *     t2 / t1 = 25.677524ms
+ *     t1 =
+ *     t2 =
+ *     t2 / t1 =
  *     
  * 3.
  *     n is the same as the array being searched (100000)
  *     t1 = 10.0ms
  *     t2 = 43.0ms
- *     t2 / t1 = 4.3ms
+ *     t2 / t1 =
  * 4.
  *     Main Method:
  *     Generate Random Array:
@@ -184,8 +173,7 @@ public class AsymptoticBehavior {
  *     Sort Random Array:
  *     Search Array:
  * 5.
- *     The main discrepency is that simulations
- *     find T(n) as opposed to O(n) which shows
- *     the real time of the simulation as opposed
- *     to the worst-case-scenario.
+ *     We found that often in practice the time it
+ *     takes does not line up exactly with Big-Oh
+ *     since we are finding T(n) instead of O(n).
  */
